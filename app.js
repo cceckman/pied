@@ -3,11 +3,6 @@ const canvas = document.getElementById("draw-here");
 
 // Use https://stackoverflow.com/questions/4288253/html5-canvas-100-width-height-of-viewport ?
 function rerender() {
-    const params = new URLSearchParams(window.location.search);
-    const stitchwidth = params.get("stitchwidth") ?? 19;
-    const stitchheight = params.get("stitchheight") ?? 13;
-    const threads = params.get("threads") ?? 7;
-
     canvas.height = canvas.clientHeight;
     canvas.width = canvas.clientWidth;
     let h = canvas.height;
@@ -17,6 +12,12 @@ function rerender() {
     let ctx = canvas.getContext("2d");
 
     let gradient_params = [];
+
+    const params = new URLSearchParams(window.location.search);
+    const stitchwidth = Number(params.get("stitchwidth") ?? 19);
+    const stitchheight = Number(params.get("stitchheight") ?? 13);
+    const threads = Number(params.get("threads") ?? 7);
+    console.log("params:", stitchwidth, stitchheight, threads);
 
     // For each column, create numthreads gradients, starting at different points.
     for (let col = 0; col < threads; col++) {
