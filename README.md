@@ -42,4 +42,9 @@ The threads gradually shift their hue according to their speed.
 
 The renderer works in the round, picking up at the start of the next column where it left off in the last one.
 
-I might add query parameters to change the stitch size and number of threads.
+## Controls
+
+You can use query parameters to set the number of `threads`, the `stitchheight`,
+and the `stitchwidth`. For instance,
+https://cceckman.github.io/pied?threads=1&stitchwidth=100
+will show several very wide stripes of one gradient.

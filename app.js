@@ -1,18 +1,13 @@
 
 const canvas = document.getElementById("draw-here");
 
-const stitchwidth = 19;
-const stitchheight = 13;
-const numthreads = 7;
-
-// Each iteration, yield two color stops,
-// evenly (?) spaced around the hue spectrum.
-// Not great varigation... but easy to write?
-function* next_color(start, steps) {
-}
-
 // Use https://stackoverflow.com/questions/4288253/html5-canvas-100-width-height-of-viewport ?
 function rerender() {
+    const params = new URLSearchParams(window.location.search);
+    const stitchwidth = params.get("stitchwidth") ?? 19;
+    const stitchheight = params.get("stitchheight") ?? 13;
+    const threads = params.get("threads") ?? 7;
+
     canvas.height = canvas.clientHeight;
     canvas.width = canvas.clientWidth;
     let h = canvas.height;
@@ -24,7 +19,7 @@ function rerender() {
     let gradient_params = [];
 
     // For each column, create numthreads gradients, starting at different points.
-    for (let col = 0; col < numthreads; col++) {
+    for (let col = 0; col < threads; col++) {
         let sat = Math.round(Math.random() * 70 + 30);
         let val = Math.round(Math.random() * 70 + 30);
         let start_color = Math.round(Math.random() * 360);
@@ -55,7 +50,7 @@ function rerender() {
         }
         for (let y0 = 0; y0 < h; y0 += stitchheight) {
             ctx.fillStyle = gradients[thread];
-            thread = (thread + 1) % numthreads;
+            thread = (thread + 1) % threads;
             ctx.fillRect(x0, y0, stitchwidth, stitchheight);
         }
     }
