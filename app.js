@@ -42,7 +42,8 @@ function rerender() {
             const end_str = `hsl(${end_color}deg, ${g.sat}%, ${g.val}%)`;
 
             // console.log("colors: ", start_str, end_str)
-            const grad = ctx.createLinearGradient(x0, 0, x0 + stitchwidth, h);
+            // Gradient only in the vertical dimension.
+            const grad = ctx.createLinearGradient(x0, 0, x0, h);
             grad.addColorStop(0, start_str);
             grad.addColorStop(0.5, mid_str);
             grad.addColorStop(1, end_str);
