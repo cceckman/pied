@@ -87,16 +87,14 @@ function rerender() {
     const stitchwidth = Number(params.get("stitchwidth") ?? 19);
     const stitchheight = Number(params.get("stitchheight") ?? 13);
     const threads = Number(params.get("threads") ?? 3);
-    const mode = params.get("mode") ?? "value";
+    const mode = params.get("mode") ?? "";
     console.log("params:", stitchwidth, stitchheight, threads);
 
     for (let col = 0; col < threads; col++) {
-        let constructor;
-        if(mode === "hue") {
+        let constructor = LightnessGradient;
+        if(mode === "hue" || (mode === "" && Math.random() >= 0.5)) {
             constructor = HueGradient;
-        } else if (mode === "value") {
-            constructor = LightnessGradient;
-        }
+        } 
         gradient_params.push(new constructor());
     }
 

@@ -44,7 +44,10 @@ The renderer works in the round, picking up at the start of the next column wher
 
 ## Controls
 
-You can use query parameters to set the number of `threads`, the `stitchheight`,
-and the `stitchwidth`. For instance,
-https://cceckman.github.io/pied?threads=1&stitchwidth=100
-will show several very wide stripes of one gradient.
+You can use query parameters to set:
+
+- How many `threads` are interwoven
+- The `stitchheight` and `stitchwidth`
+- The `mode` of what parameter varies for threads: `hue` or `value`.
+  (Default is "a random mix")
+
